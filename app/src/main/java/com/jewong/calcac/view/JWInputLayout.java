@@ -17,15 +17,16 @@ import com.jewong.calcac.common.SimpleTextWatcher.Callback;
 public class JWInputLayout extends TextInputLayout {
 
     EditText mEditText;
+    TextInputLayout mTextInputLayout;
 
-    public void bindEditText(EditText editText) {
+    public void bindViews(EditText editText, TextInputLayout textInputLayout) {
         mEditText = editText;
+        mTextInputLayout = textInputLayout;
     }
 
     public JWInputLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
-
 
     @BindingAdapter("android:textAttrChanged")
     public static void setTextListener(
@@ -50,6 +51,17 @@ public class JWInputLayout extends TextInputLayout {
         String t = (text != null) ? text : "";
         if (!layout.mEditText.getText().toString().equals(t)) {
             layout.mEditText.setText(t);
+        }
+    }
+
+    @BindingAdapter("android:hint")
+    public static void setHint(JWInputLayout layout, Integer resId) {
+        Context context = layout.getContext();
+        CharSequence hint = layout.mTextInputLayout.getHint();
+        String t = (resId != null) ? context.getText(resId).toString() : "";
+        String h = (hint != null) ? hint.toString() : "";
+        if (!h.equals(t)) {
+            layout.mTextInputLayout.setHint(t);
         }
     }
 

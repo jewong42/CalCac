@@ -30,7 +30,7 @@ public class JWDropDownInputLayout extends JWInputLayout {
     }
 
     private void initView(Context context, AttributeSet attrs) {
-        bindEditText(mDataBinding.inputEditText);
+        bindViews(mDataBinding.inputEditText, mDataBinding.inputLayout);
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.JWDropDownInputLayout,

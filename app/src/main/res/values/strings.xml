@@ -6,4 +6,8 @@
     <string name="height_hint">Height</string>
     <string name="height_hint_imperial">Height (cm)</string>
     <string name="height_hint_metric">Height (in)</string>
+    <string name="mock_int_value">000</string>
+    <string name="quick_options">Quick Options</string>
+    <string name="diet_hint">Diet</string>
+    <string name="weight_goal_hint">Weight goal</string>
 </resources>

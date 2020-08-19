@@ -16,29 +16,28 @@ import com.jewong.calcac.R;
 import com.jewong.calcac.common.BaseFragment;
 import com.jewong.calcac.data.stringdef.Gender;
 import com.jewong.calcac.data.stringdef.SystemOfMeasurement;
-import com.jewong.calcac.databinding.FragmentProfileFormBinding;
+import com.jewong.calcac.databinding.FragmentProfileBinding;
 
 import java.util.Arrays;
 import java.util.List;
 
+public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
 
-public class ProfileFormFragment extends BaseFragment<FragmentProfileFormBinding> {
+    private ProfileViewModel mProfileViewModel;
 
-    private ProfileFormViewModel mProfileFormViewModel;
-
-    final static List<String> GENDER_LIST = Arrays.asList(Gender.MALE, Gender.FEMALE);
-    final static List<String> SYSTEM_LIST = Arrays.asList(SystemOfMeasurement.METRIC, SystemOfMeasurement.IMPERIAL);
+    final static List<String> DIET_LIST = Arrays.asList(SystemOfMeasurement.METRIC, SystemOfMeasurement.IMPERIAL);
+    final static List<String> WEIGHT_GOAL_LIST = Arrays.asList(Gender.MALE, Gender.FEMALE);
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         NavController navController = NavHostFragment.findNavController(this);
         NavBackStackEntry backStackEntry = navController.getBackStackEntry(R.id.navigation);
-        mProfileFormViewModel = new ViewModelProvider(backStackEntry).get(ProfileFormViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_profile_form, container, false);
-        FragmentProfileFormBinding binding = FragmentProfileFormBinding.bind(root);
+        mProfileViewModel = new ViewModelProvider(backStackEntry).get(ProfileViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        FragmentProfileBinding binding = FragmentProfileBinding.bind(root);
         binding.setLifecycleOwner(this);
-        binding.setMProfileFormViewModel(mProfileFormViewModel);
+        binding.setMProfileFormViewModel(mProfileViewModel);
         mDataBinding = binding;
         return binding.getRoot();
     }
@@ -50,11 +49,8 @@ public class ProfileFormFragment extends BaseFragment<FragmentProfileFormBinding
     }
 
     private void initViews() {
-        mDataBinding.genderInput.setItems(GENDER_LIST, getContext());
-        mDataBinding.systemInput.setItems(SYSTEM_LIST, getContext());
-        mDataBinding.submitButton.setOnClickListener(v -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_profile_form_to_profile);
-        });
+        mDataBinding.dietInput.setItems(DIET_LIST, getContext());
+        mDataBinding.weightGoalInput.setItems(WEIGHT_GOAL_LIST, getContext());
     }
 
 }

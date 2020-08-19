@@ -93,6 +93,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:layout_marginTop="62dp"

@@ -53,6 +53,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
     implementation "androidx.room:room-guava:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
@@ -66,4 +67,6 @@ dependencies {
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
+    // LeakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }

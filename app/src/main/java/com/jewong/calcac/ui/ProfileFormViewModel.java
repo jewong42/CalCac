@@ -11,24 +11,35 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 
 import com.jewong.calcac.R;
+import com.jewong.calcac.common.StringUtils;
+import com.jewong.calcac.data.entity.User;
 import com.jewong.calcac.data.stringdef.SystemOfMeasurement;
+import com.jewong.calcac.model.ProfileRepository;
 
 public class ProfileFormViewModel extends AndroidViewModel {
 
+    private ProfileRepository mProfileRepository;
+    public LiveData<User> mUser;
     public MutableLiveData<String> mNameInput = new MutableLiveData<>("");
     public MutableLiveData<String> mGenderInput = new MutableLiveData<>("");
     public MutableLiveData<String> mSystemInput = new MutableLiveData<>("");
     public MutableLiveData<String> mAgeInput = new MutableLiveData<>("");
     public MutableLiveData<String> mHeightInput = new MutableLiveData<>("");
-    public LiveData<Integer> mHeightHint = Transformations.map(mSystemInput, this::getHeightHint);
     public MutableLiveData<String> mWeightInput = new MutableLiveData<>("");
+    public LiveData<Integer> mHeightHint = Transformations.map(mSystemInput, this::getHeightHint);
     public LiveData<Integer> mWeightHint = Transformations.map(mSystemInput, this::getWeightHint);
     public MediatorLiveData<Boolean> mIsFormCompleted = new MediatorLiveData<>();
 
     public ProfileFormViewModel(@NonNull Application application) {
         super(application);
+        mProfileRepository = new ProfileRepository(application);
+        mUser = mProfileRepository.getUser();
+        initFormMediator();
+    }
+
+    private void initFormMediator() {
         Observer<String> formObserver = value -> mIsFormCompleted.setValue(
-                ProfileFormViewModel.this.isFormFilled() && ProfileFormViewModel.this.isFormValid());
+                ProfileFormViewModel.this.isFormFilled());
         mIsFormCompleted.addSource(mNameInput, formObserver);
         mIsFormCompleted.addSource(mNameInput, formObserver);
         mIsFormCompleted.addSource(mGenderInput, formObserver);
@@ -36,6 +47,40 @@ public class ProfileFormViewModel extends AndroidViewModel {
         mIsFormCompleted.addSource(mSystemInput, formObserver);
         mIsFormCompleted.addSource(mHeightInput, formObserver);
         mIsFormCompleted.addSource(mWeightInput, formObserver);
+    }
+
+    public void saveUserAndClearCache() {
+        User user = getUserFromFactory();
+        clearCache();
+        if (user != null) {
+            mProfileRepository.insert(user);
+        }
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private User getUserFromFactory() {
+        try {
+            return new User(
+                    mNameInput.getValue(),
+                    mGenderInput.getValue(),
+                    mSystemInput.getValue(),
+                    Integer.parseInt(mAgeInput.getValue()),
+                    Integer.parseInt(mWeightInput.getValue()),
+                    Integer.parseInt(mHeightInput.getValue()),
+                    mNameInput.getValue(),
+                    mNameInput.getValue());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public void clearCache() {
+        mNameInput.setValue("");
+        mGenderInput.setValue("");
+        mSystemInput.setValue("");
+        mAgeInput.setValue("");
+        mHeightInput.setValue("");
+        mWeightInput.setValue("");
     }
 
     private Integer getHeightHint(String system) {
@@ -60,21 +105,13 @@ public class ProfileFormViewModel extends AndroidViewModel {
         }
     }
 
-    private boolean isFormValid() {
-        return isFormFilled();
-    }
-
     private boolean isFormFilled() {
-        return !isNullOrBlank(mNameInput.getValue())
-                && !isNullOrBlank(mGenderInput.getValue())
-                && !isNullOrBlank(mSystemInput.getValue())
-                && !isNullOrBlank(mAgeInput.getValue())
-                && !isNullOrBlank(mHeightInput.getValue())
-                && !isNullOrBlank(mWeightInput.getValue());
-    }
-
-    private boolean isNullOrBlank(String string) {
-        return string == null || string.length() == 0;
+        return !StringUtils.isNullOrBlank(mNameInput.getValue())
+                && !StringUtils.isNullOrBlank(mGenderInput.getValue())
+                && !StringUtils.isNullOrBlank(mSystemInput.getValue())
+                && !StringUtils.isNullOrBlank(mAgeInput.getValue())
+                && !StringUtils.isNullOrBlank(mHeightInput.getValue())
+                && !StringUtils.isNullOrBlank(mWeightInput.getValue());
     }
 
 }

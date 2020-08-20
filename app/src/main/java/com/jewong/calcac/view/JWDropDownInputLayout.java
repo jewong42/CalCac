@@ -43,6 +43,7 @@ public class JWDropDownInputLayout extends JWInputLayout {
         }
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void setItems(List<String> items, Context context) {
         ArrayAdapter adapter = new ArrayAdapter(context, R.layout.list_item, items);
         mDataBinding.inputEditText.setAdapter(adapter);

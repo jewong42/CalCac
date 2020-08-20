@@ -9,97 +9,109 @@
             type="com.jewong.calcac.ui.ProfileFormViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:orientation="vertical">
-
-        <TextView
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Please fill out your info"
-            android:textAlignment="center" />
-
-        <com.jewong.calcac.view.JWTextInputLayout
-            android:id="@+id/name_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Name"
-            android:inputType="textCapWords"
-            android:text="@={mProfileFormViewModel.mNameInput}" />
-
-        <com.jewong.calcac.view.JWDropDownInputLayout
-            android:id="@+id/gender_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Gender"
-            android:text="@={mProfileFormViewModel.mGenderInput}" />
-
-        <com.jewong.calcac.view.JWDropDownInputLayout
-            android:id="@+id/system_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="System of measurements"
-            android:text="@={mProfileFormViewModel.mSystemInput}" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            android:weightSum="3.3">
+            android:layout_height="match_parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/form_title"
+                android:textAlignment="center" />
 
             <com.jewong.calcac.view.JWTextInputLayout
-                android:id="@+id/age_input"
-                android:layout_width="0dp"
+                android:id="@+id/name_input"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Age"
-                android:inputType="number"
-                android:text="@={mProfileFormViewModel.mAgeInput}" />
+                android:hint="@string/name_hint"
+                android:inputType="textCapWords"
+                android:text="@={mProfileFormViewModel.mNameInput}" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.15" />
-
-            <com.jewong.calcac.view.JWTextInputLayout
-                android:id="@+id/weight_input"
-                android:layout_width="0dp"
+            <com.jewong.calcac.view.JWDropDownInputLayout
+                android:id="@+id/gender_input"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@{mProfileFormViewModel.mWeightHint}"
-                android:inputType="number"
-                android:text="@={mProfileFormViewModel.mWeightInput}" />
+                android:hint="@string/gender_hint"
+                android:text="@={mProfileFormViewModel.mGenderInput}" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.15" />
-
-            <com.jewong.calcac.view.JWTextInputLayout
-                android:id="@+id/height_input"
-                android:layout_width="0dp"
+            <com.jewong.calcac.view.JWDropDownInputLayout
+                android:id="@+id/system_input"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@{mProfileFormViewModel.mHeightHint}"
-                android:inputType="number"
-                android:text="@={mProfileFormViewModel.mHeightInput}" />
+                android:hint="@string/system_of_measurements_hint"
+                android:text="@={mProfileFormViewModel.mSystemInput}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:showDividers="middle"
+                android:weightSum="3.3">
+
+                <com.jewong.calcac.view.JWTextInputLayout
+                    android:id="@+id/age_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/age_hint"
+                    android:inputType="number"
+                    android:text="@={mProfileFormViewModel.mAgeInput}" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.15" />
+
+                <com.jewong.calcac.view.JWTextInputLayout
+                    android:id="@+id/weight_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@{mProfileFormViewModel.mWeightHint}"
+                    android:inputType="number"
+                    android:text="@={mProfileFormViewModel.mWeightInput}" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.15" />
+
+                <com.jewong.calcac.view.JWTextInputLayout
+                    android:id="@+id/height_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@{mProfileFormViewModel.mHeightHint}"
+                    android:inputType="number"
+                    android:text="@={mProfileFormViewModel.mHeightInput}" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="62dp"
+                android:enabled="@{mProfileFormViewModel.mIsFormCompleted}"
+                android:text="@string/submit" />
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/submit_button"
+        <include
+            android:id="@+id/progress_bar"
+            layout="@layout/view_progress_bar"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_marginTop="62dp"
-            android:enabled="@{mProfileFormViewModel.mIsFormCompleted}"
-            android:text="Submit" />
+            android:layout_height="match_parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

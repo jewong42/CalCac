@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavBackStackEntry;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.jewong.calcac.R;
 import com.jewong.calcac.common.BaseFragment;
@@ -21,6 +18,7 @@ import com.jewong.calcac.databinding.FragmentProfileFormBinding;
 import java.util.Arrays;
 import java.util.List;
 
+import static androidx.navigation.fragment.NavHostFragment.findNavController;
 
 public class ProfileFormFragment extends BaseFragment<FragmentProfileFormBinding> {
 
@@ -32,9 +30,7 @@ public class ProfileFormFragment extends BaseFragment<FragmentProfileFormBinding
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        NavController navController = NavHostFragment.findNavController(this);
-        NavBackStackEntry backStackEntry = navController.getBackStackEntry(R.id.navigation);
-        mProfileFormViewModel = new ViewModelProvider(backStackEntry).get(ProfileFormViewModel.class);
+        mProfileFormViewModel = new ViewModelProvider(this).get(ProfileFormViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile_form, container, false);
         FragmentProfileFormBinding binding = FragmentProfileFormBinding.bind(root);
         binding.setLifecycleOwner(this);
@@ -47,13 +43,26 @@ public class ProfileFormFragment extends BaseFragment<FragmentProfileFormBinding
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+        observeUser();
     }
 
     private void initViews() {
         mDataBinding.genderInput.setItems(GENDER_LIST, getContext());
         mDataBinding.systemInput.setItems(SYSTEM_LIST, getContext());
         mDataBinding.submitButton.setOnClickListener(v -> {
-            NavHostFragment.findNavController(this).navigate(R.id.action_profile_form_to_profile);
+            hideSoftKeyBoard();
+            mDataBinding.progressBar.setVisibility(View.VISIBLE);
+            mProfileFormViewModel.saveUserAndClearCache();
+        });
+    }
+
+    private void observeUser() {
+        mProfileFormViewModel.mUser.observe(getViewLifecycleOwner(), user -> {
+            if (user != null) {
+                findNavController(this).navigate(R.id.action_form_to_profile);
+            } else {
+                mDataBinding.progressBar.setVisibility(View.GONE);
+            }
         });
     }
 

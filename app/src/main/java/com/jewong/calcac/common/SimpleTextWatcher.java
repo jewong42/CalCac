@@ -27,7 +27,7 @@ public class SimpleTextWatcher implements TextWatcher {
     }
 
     public interface Callback {
-        public void onTextChanged();
+        void onTextChanged();
     }
 
 }

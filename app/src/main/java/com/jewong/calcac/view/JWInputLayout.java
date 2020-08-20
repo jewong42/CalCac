@@ -12,7 +12,6 @@ import androidx.databinding.InverseBindingListener;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.jewong.calcac.common.SimpleTextWatcher;
-import com.jewong.calcac.common.SimpleTextWatcher.Callback;
 
 public class JWInputLayout extends TextInputLayout {
 
@@ -33,12 +32,7 @@ public class JWInputLayout extends TextInputLayout {
             JWInputLayout layout,
             final InverseBindingListener listener
     ) {
-        layout.mEditText.addTextChangedListener(new SimpleTextWatcher(new Callback() {
-            @Override
-            public void onTextChanged() {
-                listener.onChange();
-            }
-        }));
+        layout.mEditText.addTextChangedListener(new SimpleTextWatcher(listener::onChange));
     }
 
     @InverseBindingAdapter(attribute = "android:text")

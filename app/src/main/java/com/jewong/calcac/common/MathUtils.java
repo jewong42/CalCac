@@ -1,17 +1,100 @@
 package com.jewong.calcac.common;
 
 import com.jewong.calcac.data.entity.User;
+import com.jewong.calcac.data.stringdef.Diet;
 import com.jewong.calcac.data.stringdef.Gender;
+import com.jewong.calcac.data.stringdef.Goal;
 import com.jewong.calcac.data.stringdef.SystemOfMeasurement;
 
 public final class MathUtils {
 
     public static float getCalories(User user) {
+        float baseCalories = getBaseCalories(user);
+        float genderModifier = user.getGender().equals(Gender.MALE) ? 5f : -161f;
+        float goalModifier = 0f;
+        switch (user.getWeightGoal()) {
+            case Goal.WEIGHT_GAIN:
+                goalModifier = 200f;
+                break;
+            case Goal.WEIGHT_LOSS:
+                goalModifier = -200f;
+                break;
+        }
+        return roundToOneDecimal(baseCalories + genderModifier + goalModifier);
+    }
+
+    public static float getFats(User user) {
         if (user == null) return 0f;
-        int weight = user.getWeight();
-        int height = user.getHeight();
+        float calories = getCalories(user);
+        float multiplier = 1f;
+        switch (user.getDiet()) {
+            case Diet.KETO:
+                multiplier = 0.70f;
+                break;
+            case Diet.LOW_CARB:
+                multiplier = 0.40f;
+                break;
+            case Diet.PALEO:
+                multiplier = 0.35f;
+                break;
+            case Diet.TRADITIONAL:
+                multiplier = 0.15f;
+                break;
+        }
+        return roundToOneDecimal((calories * multiplier) / 9f);
+    }
+
+    public static float getCarbohydrates(User user) {
+        if (user == null) return 0f;
+        float calories = getCalories(user);
+        float multiplier = 1f;
+        switch (user.getDiet()) {
+            case Diet.KETO:
+                multiplier = 0.05f;
+                break;
+            case Diet.LOW_CARB:
+                multiplier = 0.20f;
+                break;
+            case Diet.PALEO:
+                multiplier = 0.40f;
+                break;
+            case Diet.TRADITIONAL:
+                multiplier = 0.60f;
+                break;
+        }
+        return roundToOneDecimal((calories * multiplier) / 4);
+    }
+
+    public static float getProtein(User user) {
+        if (user == null) return 0f;
+        float calories = getCalories(user);
+        float multiplier = 1f;
+        switch (user.getDiet()) {
+            case Diet.KETO:
+                multiplier = 0.25f;
+                break;
+            case Diet.LOW_CARB:
+                multiplier = 0.40f;
+                break;
+            case Diet.PALEO:
+                multiplier = 0.25f;
+                break;
+            case Diet.TRADITIONAL:
+                multiplier = 0.25f;
+                break;
+        }
+        return roundToOneDecimal((calories * multiplier) / 4f);
+    }
+
+    public static float roundToOneDecimal(float f) {
+        return Math.round(f * 10.0f) / 10.0f;
+    }
+
+    private static float getBaseCalories(User user) {
+        if (user == null) return 0f;
+        float weight = user.getWeight();
+        float height = user.getHeight();
         int age = user.getAge();
-        String gender = user.getGender();
         float weightMultiplier =
                 user.getSystemOfMeasurement().equals(SystemOfMeasurement.IMPERIAL) ? 2.20462f : 1f;
         float heightMultiplier =
@@ -19,33 +102,7 @@ public final class MathUtils {
         float f1 = (10.0f * weight) / weightMultiplier;
         float f2 = (6.25f * height) / heightMultiplier;
         float f3 = 5.00f * age;
-        if (gender.equals(Gender.MALE)) {
-            return roundToOneDecimal(f1 + f2 - f3 + 5f);
-        } else {
-            return roundToOneDecimal(f1 + f2 - f3 - 161f);
-        }
-    }
-
-    public static float getFats(User user) {
-        if (user == null) return 0f;
-        float calories = getCalories(user);
-        return roundToOneDecimal((calories / 9f) * 0.30f);
-    }
-
-    public static float getCarbohydrates(User user) {
-        if (user == null) return 0f;
-        float calories = getCalories(user);
-        return roundToOneDecimal((calories / 4f) * 0.45f);
-    }
-
-    public static float getProtein(User user) {
-        if (user == null) return 0f;
-        float calories = getCalories(user);
-        return roundToOneDecimal((calories / 4f) * 0.45f);
-    }
-
-    private static float roundToOneDecimal(float f) {
-        return Math.round(f * 10.0f) / 10.0f;
+        return roundToOneDecimal(f1 + f2 - f3);
     }
 
 }

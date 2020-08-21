@@ -4,17 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 
-
 import com.jewong.calcac.R;
 import com.jewong.calcac.common.BaseFragment;
-import com.jewong.calcac.data.stringdef.Gender;
-import com.jewong.calcac.data.stringdef.SystemOfMeasurement;
+import com.jewong.calcac.data.stringdef.Diet;
+import com.jewong.calcac.data.stringdef.Goal;
 import com.jewong.calcac.databinding.FragmentProfileBinding;
 
 import java.util.Arrays;
@@ -25,9 +26,19 @@ import static androidx.navigation.fragment.NavHostFragment.findNavController;
 public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
 
     private ProfileViewModel mProfileViewModel;
+    private View.OnFocusChangeListener mHideSoftKeyBoardFL = (v, hasFocus) -> {
+        if (!hasFocus) {
+            hideSoftKeyBoard(v);
+            mProfileViewModel.updateWeight();
+        }
+    };
+    private TextView.OnEditorActionListener mClearFocusEAL = (v, actionId, event) -> {
+        if (actionId == EditorInfo.IME_ACTION_DONE) mDataBinding.weightInput.clearFocus();
+        return false;
+    };
 
-    final static List<String> DIET_LIST = Arrays.asList(SystemOfMeasurement.METRIC, SystemOfMeasurement.IMPERIAL);
-    final static List<String> WEIGHT_GOAL_LIST = Arrays.asList(Gender.MALE, Gender.FEMALE);
+    final static List<String> DIET_LIST = Arrays.asList(Diet.TRADITIONAL, Diet.PALEO, Diet.LOW_CARB, Diet.KETO);
+    final static List<String> WEIGHT_GOAL_LIST = Arrays.asList(Goal.WEIGHT_LOSS, Goal.WEIGHT_GAIN, Goal.MAINTENANCE);
 
     @Nullable
     @Override
@@ -44,13 +55,21 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initViews();
         observeUser();
+        initViews();
+        initObservers();
+    }
+
+    private void initObservers() {
+        mProfileViewModel.mDietInput.observe(getViewLifecycleOwner(), s -> mProfileViewModel.updateDiet());
+        mProfileViewModel.mGoalInput.observe(getViewLifecycleOwner(), s -> mProfileViewModel.updateGoal());
     }
 
     private void initViews() {
         mDataBinding.dietInput.setItems(DIET_LIST, getContext());
         mDataBinding.weightGoalInput.setItems(WEIGHT_GOAL_LIST, getContext());
+        mDataBinding.weightInput.setOnFocusChangeListener(mHideSoftKeyBoardFL);
+        mDataBinding.weightInput.setOnEditorActionListener(mClearFocusEAL);
         mDataBinding.toolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.item_reset_account:
@@ -61,6 +80,17 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
                     break;
             }
             return true;
+        });
+    }
+
+    private void observeUser() {
+        mProfileViewModel.mUser.observe(getViewLifecycleOwner(), user -> {
+            if (user == null) {
+                findNavController(this).navigate(R.id.action_profile_to_form);
+            } else {
+                mDataBinding.progressBar.setVisibility(View.GONE);
+                mProfileViewModel.updateData();
+            }
         });
     }
 
@@ -83,16 +113,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
                 })
                 .create()
                 .show();
-    }
-
-    private void observeUser() {
-        mProfileViewModel.mUser.observe(getViewLifecycleOwner(), user -> {
-            if (user == null) {
-                findNavController(this).navigate(R.id.action_profile_to_form);
-            } else {
-                mDataBinding.progressBar.setVisibility(View.GONE);
-            }
-        });
     }
 
 }

@@ -2,7 +2,9 @@ package com.jewong.calcac.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +29,15 @@ public class JWInputLayout extends TextInputLayout {
         super(context, attrs);
     }
 
+    @Override
+    public void setOnFocusChangeListener(OnFocusChangeListener l) {
+        mEditText.setOnFocusChangeListener(l);
+    }
+
+    public void setOnEditorActionListener(TextView.OnEditorActionListener l) {
+        mEditText.setOnEditorActionListener(l);
+    }
+
     @BindingAdapter("android:textAttrChanged")
     public static void setTextListener(
             JWInputLayout layout,
@@ -44,7 +55,11 @@ public class JWInputLayout extends TextInputLayout {
     public static void setText(JWInputLayout layout, String text) {
         String t = (text != null) ? text : "";
         if (!layout.mEditText.getText().toString().equals(t)) {
-            layout.mEditText.setText(t);
+            if (layout.mEditText instanceof AutoCompleteTextView) {
+                ((AutoCompleteTextView) layout.mEditText).setText(t, false);
+            } else {
+                layout.mEditText.setText(t);
+            }
         }
     }
 
@@ -57,6 +72,11 @@ public class JWInputLayout extends TextInputLayout {
         if (!h.equals(t)) {
             layout.mTextInputLayout.setHint(t);
         }
+    }
+
+    @BindingAdapter("imeOptions")
+    public static void setImeOption(JWInputLayout layout, int option) {
+        layout.mEditText.setImeOptions(option);
     }
 
 }

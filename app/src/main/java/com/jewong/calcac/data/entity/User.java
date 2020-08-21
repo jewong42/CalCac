@@ -3,6 +3,10 @@ package com.jewong.calcac.data.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.jewong.calcac.common.StringUtils;
+import com.jewong.calcac.data.stringdef.Diet;
+import com.jewong.calcac.data.stringdef.Goal;
+
 @SuppressWarnings("unused")
 @Entity(tableName = "user")
 public class User {
@@ -13,12 +17,13 @@ public class User {
     private String gender;
     private String systemOfMeasurement;
     private int age;
-    private int weight;
-    private int height;
+    private float weight;
+    private float height;
     private String diet;
     private String weightGoal;
 
-    public User(String name, String gender, String systemOfMeasurement, int age, int weight, int height, String diet, String weightGoal) {
+
+    public User(String name, String gender, String systemOfMeasurement, int age, float weight, float height, String diet, String weightGoal) {
         this.userId = 0;
         this.name = name;
         this.gender = gender;
@@ -26,8 +31,8 @@ public class User {
         this.age = age;
         this.weight = weight;
         this.height = height;
-        this.diet = diet;
-        this.weightGoal = weightGoal;
+        this.diet = StringUtils.isNullOrBlank(diet) ? Diet.TRADITIONAL : diet;
+        this.weightGoal = StringUtils.isNullOrBlank(weightGoal) ? Goal.MAINTENANCE : weightGoal;
     }
 
     public int getUserId() {
@@ -70,19 +75,19 @@ public class User {
         this.age = age;
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
@@ -101,6 +106,5 @@ public class User {
     public void setWeightGoal(String weightGoal) {
         this.weightGoal = weightGoal;
     }
-
 
 }

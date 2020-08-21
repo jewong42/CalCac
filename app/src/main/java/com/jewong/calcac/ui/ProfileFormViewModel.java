@@ -52,9 +52,7 @@ public class ProfileFormViewModel extends AndroidViewModel {
     public void saveUserAndClearCache() {
         User user = getUserFromFactory();
         clearCache();
-        if (user != null) {
-            mProfileRepository.insert(user);
-        }
+        mProfileRepository.insert(user);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -65,10 +63,10 @@ public class ProfileFormViewModel extends AndroidViewModel {
                     mGenderInput.getValue(),
                     mSystemInput.getValue(),
                     Integer.parseInt(mAgeInput.getValue()),
-                    Integer.parseInt(mWeightInput.getValue()),
-                    Integer.parseInt(mHeightInput.getValue()),
-                    mNameInput.getValue(),
-                    mNameInput.getValue());
+                    Float.parseFloat(mWeightInput.getValue()),
+                    Float.parseFloat(mHeightInput.getValue()),
+                    null,
+                    null);
         } catch (Exception e) {
             return null;
         }

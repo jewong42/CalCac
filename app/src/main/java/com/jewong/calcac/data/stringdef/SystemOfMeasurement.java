@@ -12,8 +12,8 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 public @interface SystemOfMeasurement {
 
-    String IMPERIAL = "IMPERIAL";
+    String IMPERIAL = "Imperial (lb/in)";
 
-    String METRIC = "METRIC";
+    String METRIC = "Metric (kg/cm)";
 
 }

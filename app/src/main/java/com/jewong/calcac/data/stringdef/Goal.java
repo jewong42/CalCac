@@ -6,17 +6,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @StringDef({
-        Gender.MALE,
-        Gender.FEMALE,
-        Gender.OTHER
+        Goal.WEIGHT_LOSS,
+        Goal.MAINTENANCE,
+        Goal.WEIGHT_GAIN
 })
 @Retention(RetentionPolicy.SOURCE)
-public @interface Gender {
+public @interface Goal {
 
-    String MALE = "Male";
+    String WEIGHT_LOSS = "Weight loss";
 
-    String FEMALE = "Female";
+    String MAINTENANCE = "Maintenance";
 
-    String OTHER = "Other";
+    String WEIGHT_GAIN = "Weight gain";
 
 }

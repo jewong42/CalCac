@@ -23,4 +23,16 @@ public class BaseFragment<DB> extends Fragment {
         if (view != null) imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    protected void hideSoftKeyBoard(View view) {
+        if (getActivity() == null) return;
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (view != null) imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    protected void showSoftKeyBoard(View view) {
+        if (getActivity() == null) return;
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (view != null) imm.showSoftInput(view, 0);
+    }
+
 }

@@ -7,13 +7,20 @@
     <data>
 
         <variable
+            name="mEditorInfo"
+            type="android.view.inputmethod.EditorInfo" />
+
+        <variable
             name="mProfileFormViewModel"
             type="com.jewong.calcac.ui.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/toolbar_container"
@@ -30,19 +37,20 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <TextView
+        <com.jewong.calcac.view.JWTextView
             android:id="@+id/calories_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
             android:gravity="center"
-            android:text="@{mProfileFormViewModel.mCalories}"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+            app:label="@string/calories_label"
+            app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
             app:layout_constraintBottom_toTopOf="@id/option_container"
             app:layout_constraintTop_toBottomOf="@id/toolbar_container"
-            tools:text="@string/mock_int_value" />
+            app:text="@{String.valueOf(mProfileFormViewModel.mCalories)}"
+            app:textAppearance="@style/TextAppearance.MaterialComponents.Headline3" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/data_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,39 +59,48 @@
             android:weightSum="3"
             app:layout_constraintTop_toBottomOf="@id/calories_text_view">
 
-            <TextView
+            <com.jewong.calcac.view.JWTextView
                 android:id="@+id/carb_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@{mProfileFormViewModel.mCarbohydrates}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                tools:text="@string/mock_int_value" />
+                app:label="@string/carbohydrates_label"
+                app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                app:text="@{String.valueOf(mProfileFormViewModel.mCarbohydrates)}"
+                app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:textSuffix="@string/gram"
+                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
 
-            <TextView
+            <com.jewong.calcac.view.JWTextView
                 android:id="@+id/protein_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@{mProfileFormViewModel.mProtein}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                tools:text="@string/mock_int_value" />
+                app:label="@string/protein_label"
+                app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                app:text="@{String.valueOf(mProfileFormViewModel.mProtein)}"
+                app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:textSuffix="@string/gram"
+                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
 
-            <TextView
+            <com.jewong.calcac.view.JWTextView
                 android:id="@+id/fat_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@{mProfileFormViewModel.mFat}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                tools:text="@string/mock_int_value" />
+                app:label="@string/fat_label"
+                app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                app:text="@{String.valueOf(mProfileFormViewModel.mFat)}"
+                app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:textSuffix="@string/gram"
+                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/option_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +108,7 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 style="@style/TextAppearance.MaterialComponents.Overline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,8 +120,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/weight_hint"
-                android:inputType="textCapWords"
-                android:text="@={mProfileFormViewModel.mWeightInput}" />
+                android:inputType="numberDecimal"
+                android:text="@={mProfileFormViewModel.mWeightInput}"
+                app:imeOptions="@{mEditorInfo.IME_ACTION_DONE}" />
 
             <com.jewong.calcac.view.JWDropDownInputLayout
                 android:id="@+id/diet_input"
@@ -117,10 +135,11 @@
                 android:id="@+id/weight_goal_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
                 android:hint="@string/weight_goal_hint"
-                android:text="@={mProfileFormViewModel.mWeightGoalInput}" />
+                android:text="@={mProfileFormViewModel.mGoalInput}" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <include
             android:id="@+id/progress_bar"

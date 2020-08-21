@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="mEditorInfo"
+            type="android.view.inputmethod.EditorInfo" />
 
         <variable
             name="mProfileFormViewModel"
@@ -11,21 +16,53 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu_form" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_container">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:text="@string/form_title"
+                android:textAlignment="center" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/desc_text_view"
+                style="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:text="@string/form_desc"
                 android:textAlignment="center" />
 
             <com.jewong.calcac.view.JWTextInputLayout
@@ -33,8 +70,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name_hint"
-                android:inputType="textCapWords"
-                android:text="@={mProfileFormViewModel.mNameInput}" />
+                android:inputType="textPersonName|textCapSentences"
+                android:text="@={mProfileFormViewModel.mNameInput}"
+                app:imeOptions="@{mEditorInfo.IME_ACTION_NEXT}" />
 
             <com.jewong.calcac.view.JWDropDownInputLayout
                 android:id="@+id/gender_input"
@@ -50,7 +88,7 @@
                 android:hint="@string/system_of_measurements_hint"
                 android:text="@={mProfileFormViewModel.mSystemInput}" />
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -64,7 +102,8 @@
                     android:layout_weight="1"
                     android:hint="@string/age_hint"
                     android:inputType="number"
-                    android:text="@={mProfileFormViewModel.mAgeInput}" />
+                    android:text="@={mProfileFormViewModel.mAgeInput}"
+                    app:imeOptions="@{mEditorInfo.IME_ACTION_NEXT}" />
 
                 <Space
                     android:layout_width="0dp"
@@ -78,7 +117,8 @@
                     android:layout_weight="1"
                     android:hint="@{mProfileFormViewModel.mWeightHint}"
                     android:inputType="number"
-                    android:text="@={mProfileFormViewModel.mWeightInput}" />
+                    android:text="@={mProfileFormViewModel.mWeightInput}"
+                    app:imeOptions="@{mEditorInfo.IME_ACTION_NEXT}" />
 
                 <Space
                     android:layout_width="0dp"
@@ -92,9 +132,10 @@
                     android:layout_weight="1"
                     android:hint="@{mProfileFormViewModel.mHeightHint}"
                     android:inputType="number"
-                    android:text="@={mProfileFormViewModel.mHeightInput}" />
+                    android:text="@={mProfileFormViewModel.mHeightInput}"
+                    app:imeOptions="@{mEditorInfo.IME_ACTION_DONE}" />
 
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_button"
@@ -104,7 +145,7 @@
                 android:enabled="@{mProfileFormViewModel.mIsFormCompleted}"
                 android:text="@string/submit" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <include
             android:id="@+id/progress_bar"

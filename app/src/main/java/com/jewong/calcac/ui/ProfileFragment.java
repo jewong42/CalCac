@@ -75,9 +75,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
                 case R.id.item_reset_account:
                     showResetDialog();
                     break;
-                case R.id.item_backup_account:
-                    backupProfile();
-                    break;
             }
             return true;
         });

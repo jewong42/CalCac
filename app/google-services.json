@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "3491755744",
+    "firebase_url": "https://calcac-abb95.firebaseio.com",
+    "project_id": "calcac-abb95",
+    "storage_bucket": "calcac-abb95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3491755744:android:1a7c02c8e599b1758e8285",
+        "android_client_info": {
+          "package_name": "com.jewong.calcac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3491755744-e27mibsevipkv2e54hteau7mstkkpk61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB77WmTHrSqwMAA349oJdSJmOgsZtojdwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3491755744-e27mibsevipkv2e54hteau7mstkkpk61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

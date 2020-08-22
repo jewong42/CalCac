@@ -38,7 +38,7 @@ public class ProfileViewModel extends AndroidViewModel {
         super(application);
         mProfileRepository = new ProfileRepository(application);
         mUser = mProfileRepository.getUser();
-        mWeightHint = Transformations.map(mUser, mUser -> getWeightHint(mUser.getSystemOfMeasurement()));
+        mWeightHint = Transformations.map(mUser, this::getWeightHint);
     }
 
     public void deleteProfile() {
@@ -71,9 +71,9 @@ public class ProfileViewModel extends AndroidViewModel {
         mProfileRepository.updateWeight(weight);
     }
 
-    private Integer getWeightHint(String system) {
-        if (StringUtils.isNullOrBlank(system)) return 0;
-        switch (system) {
+    private Integer getWeightHint(User user) {
+        if (user == null || StringUtils.isNullOrBlank(user.getSystemOfMeasurement())) return R.string.weight_hint;
+        switch (user.getSystemOfMeasurement()) {
             case SystemOfMeasurement.METRIC:
                 return R.string.weight_hint_metric;
             case SystemOfMeasurement.IMPERIAL:

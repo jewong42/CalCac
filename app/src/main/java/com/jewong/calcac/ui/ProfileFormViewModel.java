@@ -82,6 +82,7 @@ public class ProfileFormViewModel extends AndroidViewModel {
     }
 
     private Integer getHeightHint(String system) {
+        if (StringUtils.isNullOrBlank(system)) return 0;
         switch (system) {
             case SystemOfMeasurement.METRIC:
                 return R.string.height_hint_metric;
@@ -93,6 +94,7 @@ public class ProfileFormViewModel extends AndroidViewModel {
     }
 
     private Integer getWeightHint(String system) {
+        if (StringUtils.isNullOrBlank(system)) return 0;
         switch (system) {
             case SystemOfMeasurement.METRIC:
                 return R.string.weight_hint_metric;

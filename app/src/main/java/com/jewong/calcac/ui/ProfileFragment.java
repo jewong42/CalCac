@@ -87,6 +87,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
             } else {
                 mDataBinding.progressBar.setVisibility(View.GONE);
                 mProfileViewModel.updateData();
+                mDataBinding.greetingTextView.setText(String.format(getString(R.string.greeting), user.getName()));
             }
         });
     }

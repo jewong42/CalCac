@@ -37,6 +37,27 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/greeting_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBottom_toTopOf="@id/calories_text_view"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/desc_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Here are your targets"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greeting_text_view" />
+
         <com.jewong.calcac.view.JWTextView
             android:id="@+id/calories_text_view"
             android:layout_width="match_parent"
@@ -70,7 +91,7 @@
                 app:text="@{String.valueOf(mProfileFormViewModel.mCarbohydrates)}"
                 app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:textSuffix="@string/gram"
-                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
             <com.jewong.calcac.view.JWTextView
                 android:id="@+id/protein_text_view"
@@ -83,7 +104,7 @@
                 app:text="@{String.valueOf(mProfileFormViewModel.mProtein)}"
                 app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:textSuffix="@string/gram"
-                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
             <com.jewong.calcac.view.JWTextView
                 android:id="@+id/fat_text_view"
@@ -96,7 +117,7 @@
                 app:text="@{String.valueOf(mProfileFormViewModel.mFat)}"
                 app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:textSuffix="@string/gram"
-                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+                app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -119,7 +140,7 @@
                 android:id="@+id/weight_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/weight_hint"
+                android:hint="@{mProfileFormViewModel.mWeightHint}"
                 android:inputType="numberDecimal"
                 android:text="@={mProfileFormViewModel.mWeightInput}"
                 app:imeOptions="@{mEditorInfo.IME_ACTION_DONE}" />

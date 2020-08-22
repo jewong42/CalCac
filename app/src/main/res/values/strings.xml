@@ -29,6 +29,7 @@
     <string name="protein_label">Protein</string>
     <string name="calories_label">Calories</string>
     <string name="gram">g</string>
+    <string name="greeting">Hi %s</string>
     <string name="quick_options">Quick Options</string>
 
     <string name="restore_profile">Restore profile from drive</string>

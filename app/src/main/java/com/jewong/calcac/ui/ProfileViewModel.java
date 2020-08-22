@@ -9,9 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
+import com.jewong.calcac.R;
 import com.jewong.calcac.common.MathUtils;
+import com.jewong.calcac.common.StringUtils;
 import com.jewong.calcac.data.entity.User;
+import com.jewong.calcac.data.stringdef.SystemOfMeasurement;
 import com.jewong.calcac.model.ProfileRepository;
 
 public class ProfileViewModel extends AndroidViewModel {
@@ -28,11 +32,13 @@ public class ProfileViewModel extends AndroidViewModel {
     public MutableLiveData<String> mWeightInput = new MutableLiveData<>("");
     public MutableLiveData<String> mDietInput = new MutableLiveData<>("");
     public MutableLiveData<String> mGoalInput = new MutableLiveData<>("");
+    public LiveData<Integer> mWeightHint;
 
     public ProfileViewModel(@NonNull Application application) {
         super(application);
         mProfileRepository = new ProfileRepository(application);
         mUser = mProfileRepository.getUser();
+        mWeightHint = Transformations.map(mUser, mUser -> getWeightHint(mUser.getSystemOfMeasurement()));
     }
 
     public void deleteProfile() {
@@ -63,6 +69,18 @@ public class ProfileViewModel extends AndroidViewModel {
     public void updateWeight() {
         String weight = mWeightInput.getValue();
         mProfileRepository.updateWeight(weight);
+    }
+
+    private Integer getWeightHint(String system) {
+        if (StringUtils.isNullOrBlank(system)) return 0;
+        switch (system) {
+            case SystemOfMeasurement.METRIC:
+                return R.string.weight_hint_metric;
+            case SystemOfMeasurement.IMPERIAL:
+                return R.string.weight_hint_imperial;
+            default:
+                return R.string.weight_hint;
+        }
     }
 
     private void animateToValue(MutableLiveData<Float> liveData, Float finalValue) {

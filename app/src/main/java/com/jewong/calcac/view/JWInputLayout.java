@@ -67,7 +67,7 @@ public class JWInputLayout extends TextInputLayout {
     public static void setHint(JWInputLayout layout, Integer resId) {
         Context context = layout.getContext();
         CharSequence hint = layout.mTextInputLayout.getHint();
-        String t = (resId != null) ? context.getText(resId).toString() : "";
+        String t = (resId != null && resId != 0) ? context.getText(resId).toString() : "";
         String h = (hint != null) ? hint.toString() : "";
         if (!h.equals(t)) {
             layout.mTextInputLayout.setHint(t);

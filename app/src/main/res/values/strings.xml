@@ -37,6 +37,8 @@
     <string name="greeting">Hi %s</string>
     <string name="profile_title">Here are your targets</string>
     <string name="quick_options">Quick Options</string>
+    <string name="share_targets">Share targets</string>
+    <string name="share_via">Share via</string>
     <string name="reset_profile">Reset profile</string>
     <string name="reset_confirmation">Are you sure you would like to reset your profile? You will be taken to a form where you can create a new profile.</string>
     <string name="yes">Yes</string>

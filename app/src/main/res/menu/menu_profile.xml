@@ -3,4 +3,7 @@
     <item
         android:id="@+id/item_reset_account"
         android:title="@string/reset_profile" />
+    <item
+        android:id="@+id/item_share_targets"
+        android:title="@string/share_targets" />
 </menu>

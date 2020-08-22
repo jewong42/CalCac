@@ -1,5 +1,7 @@
 package com.jewong.calcac.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -11,14 +13,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.jewong.calcac.R;
 import com.jewong.calcac.common.BaseFragment;
+import com.jewong.calcac.common.ShareService;
 import com.jewong.calcac.data.stringdef.Diet;
 import com.jewong.calcac.data.stringdef.Goal;
 import com.jewong.calcac.databinding.FragmentProfileBinding;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,7 +78,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
         mProfileViewModel.mGoalValue.observe(getViewLifecycleOwner(), s -> mProfileViewModel.updateGoal());
     }
 
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     private void initViews() {
         mDataBinding.dietInput.setItems(DIET_LIST, getContext());
         mDataBinding.weightGoalInput.setItems(WEIGHT_GOAL_LIST, getContext());
@@ -83,6 +87,9 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
             switch (item.getItemId()) {
                 case R.id.item_reset_account:
                     showResetDialog();
+                    break;
+                case R.id.item_share_targets:
+                    launchShareIntent();
                     break;
             }
             return true;
@@ -99,6 +106,20 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
                 mDataBinding.greetingTextView.setText(String.format(getString(R.string.greeting), user.getName()));
             }
         });
+    }
+
+    private void launchShareIntent() {
+        ShareService shareService = new ShareService(getContext(), mDataBinding.dataContainer);
+        File pdfFile = shareService.getFile();
+        if (getContext() == null || pdfFile == null) return;
+        Uri uri = FileProvider.getUriForFile(
+                getContext(),
+                getContext().getApplicationContext().getPackageName() + ".provider",
+                pdfFile);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setType("application/pdf");
+        startActivity(Intent.createChooser(intent, getString(R.string.share_via)));
     }
 
     @SuppressWarnings("CodeBlock2Expr")

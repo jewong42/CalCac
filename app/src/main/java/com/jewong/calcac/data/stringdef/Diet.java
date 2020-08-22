@@ -14,12 +14,12 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 public @interface Diet {
 
-    String LOW_CARB = "Low carb";
+    String LOW_CARB = "LOW_CARB";
 
-    String PALEO = "Paleo";
+    String PALEO = "PALEO";
 
-    String KETO = "Keo";
+    String KETO = "KETO";
 
-    String TRADITIONAL = "Traditional";
+    String TRADITIONAL = "TRADITIONAL";
 
 }

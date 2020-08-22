@@ -13,10 +13,10 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 public @interface Gender {
 
-    String MALE = "Male";
+    String MALE = "MALE";
 
-    String FEMALE = "Female";
+    String FEMALE = "FEMALE";
 
-    String OTHER = "Other";
+    String OTHER = "OTHER";
 
 }

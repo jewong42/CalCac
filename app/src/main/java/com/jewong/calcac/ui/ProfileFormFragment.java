@@ -1,6 +1,7 @@
 package com.jewong.calcac.ui;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,12 @@ public class ProfileFormFragment extends BaseFragment<FragmentProfileFormBinding
         return false;
     };
 
-    final static List<String> GENDER_LIST = Arrays.asList(Gender.MALE, Gender.FEMALE);
-    final static List<String> SYSTEM_LIST = Arrays.asList(SystemOfMeasurement.METRIC, SystemOfMeasurement.IMPERIAL);
+    final static List<Pair<Integer, String>> GENDER_LIST = Arrays.asList(
+            new Pair<>(R.string.male, Gender.MALE),
+            new Pair<>(R.string.female, Gender.FEMALE));
+    final static List<Pair<Integer, String>> SYSTEM_LIST = Arrays.asList(
+            new Pair<>(R.string.metric, SystemOfMeasurement.METRIC),
+            new Pair<>(R.string.imperial, SystemOfMeasurement.IMPERIAL));
 
     @Nullable
     @Override

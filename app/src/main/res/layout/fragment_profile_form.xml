@@ -58,12 +58,12 @@
                 style="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorAccentDark"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
                 android:padding="8dp"
                 android:text="@string/form_desc"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/colorAccentDark" />
 
             <com.jewong.calcac.view.JWTextInputLayout
                 android:id="@+id/name_input"
@@ -79,14 +79,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/gender_hint"
-                android:text="@={mProfileFormViewModel.mGenderInput}" />
+                android:text="@={mProfileFormViewModel.mGenderInput}"
+                android:value="@={mProfileFormViewModel.mGenderValue}" />
 
             <com.jewong.calcac.view.JWDropDownInputLayout
                 android:id="@+id/system_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/system_of_measurements_hint"
-                android:text="@={mProfileFormViewModel.mSystemInput}" />
+                android:text="@={mProfileFormViewModel.mSystemInput}"
+                android:value="@={mProfileFormViewModel.mSystemValue}" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"

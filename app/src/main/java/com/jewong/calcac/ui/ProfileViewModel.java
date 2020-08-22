@@ -30,6 +30,8 @@ public class ProfileViewModel extends AndroidViewModel {
     public MutableLiveData<Float> mCarbohydrates = new MutableLiveData<>(0f);
     public MutableLiveData<Float> mProtein = new MutableLiveData<>(0f);
     public MutableLiveData<String> mWeightInput = new MutableLiveData<>("");
+    public MutableLiveData<String> mDietValue = new MutableLiveData<>("");
+    public MutableLiveData<String> mGoalValue = new MutableLiveData<>("");
     public MutableLiveData<String> mDietInput = new MutableLiveData<>("");
     public MutableLiveData<String> mGoalInput = new MutableLiveData<>("");
     public LiveData<Integer> mWeightHint;
@@ -52,17 +54,17 @@ public class ProfileViewModel extends AndroidViewModel {
         animateToValue(mCarbohydrates, MathUtils.getCarbohydrates(mUser.getValue()));
         animateToValue(mProtein, MathUtils.getProtein(mUser.getValue()));
         mWeightInput.setValue(String.valueOf(mUser.getValue().getWeight()));
-        mDietInput.setValue(mUser.getValue().getDiet());
-        mGoalInput.setValue(mUser.getValue().getWeightGoal());
+        mDietValue.setValue(mUser.getValue().getDiet());
+        mGoalValue.setValue(mUser.getValue().getWeightGoal());
     }
 
     public void updateDiet() {
-        String diet = mDietInput.getValue();
+        String diet = mDietValue.getValue();
         mProfileRepository.updateDiet(diet);
     }
 
     public void updateGoal() {
-        String goal = mGoalInput.getValue();
+        String goal = mGoalValue.getValue();
         mProfileRepository.updateGoal(goal);
     }
 

@@ -21,13 +21,15 @@ public class ProfileFormViewModel extends AndroidViewModel {
     private ProfileRepository mProfileRepository;
     public LiveData<User> mUser;
     public MutableLiveData<String> mNameInput = new MutableLiveData<>("");
+    public MutableLiveData<String> mGenderValue = new MutableLiveData<>("");
+    public MutableLiveData<String> mSystemValue = new MutableLiveData<>("");
     public MutableLiveData<String> mGenderInput = new MutableLiveData<>("");
     public MutableLiveData<String> mSystemInput = new MutableLiveData<>("");
     public MutableLiveData<String> mAgeInput = new MutableLiveData<>("");
     public MutableLiveData<String> mHeightInput = new MutableLiveData<>("");
     public MutableLiveData<String> mWeightInput = new MutableLiveData<>("");
-    public LiveData<Integer> mHeightHint = Transformations.map(mSystemInput, this::getHeightHint);
-    public LiveData<Integer> mWeightHint = Transformations.map(mSystemInput, this::getWeightHint);
+    public LiveData<Integer> mHeightHint = Transformations.map(mSystemValue, this::getHeightHint);
+    public LiveData<Integer> mWeightHint = Transformations.map(mSystemValue, this::getWeightHint);
     public MediatorLiveData<Boolean> mIsFormCompleted = new MediatorLiveData<>();
 
     public ProfileFormViewModel(@NonNull Application application) {
@@ -42,9 +44,9 @@ public class ProfileFormViewModel extends AndroidViewModel {
                 ProfileFormViewModel.this.isFormFilled());
         mIsFormCompleted.addSource(mNameInput, formObserver);
         mIsFormCompleted.addSource(mNameInput, formObserver);
-        mIsFormCompleted.addSource(mGenderInput, formObserver);
+        mIsFormCompleted.addSource(mGenderValue, formObserver);
         mIsFormCompleted.addSource(mAgeInput, formObserver);
-        mIsFormCompleted.addSource(mSystemInput, formObserver);
+        mIsFormCompleted.addSource(mSystemValue, formObserver);
         mIsFormCompleted.addSource(mHeightInput, formObserver);
         mIsFormCompleted.addSource(mWeightInput, formObserver);
     }
@@ -60,8 +62,8 @@ public class ProfileFormViewModel extends AndroidViewModel {
         try {
             return new User(
                     mNameInput.getValue(),
-                    mGenderInput.getValue(),
-                    mSystemInput.getValue(),
+                    mGenderValue.getValue(),
+                    mSystemValue.getValue(),
                     Integer.parseInt(mAgeInput.getValue()),
                     Float.parseFloat(mWeightInput.getValue()),
                     Float.parseFloat(mHeightInput.getValue()),
@@ -107,8 +109,8 @@ public class ProfileFormViewModel extends AndroidViewModel {
 
     private boolean isFormFilled() {
         return !StringUtils.isNullOrBlank(mNameInput.getValue())
-                && !StringUtils.isNullOrBlank(mGenderInput.getValue())
-                && !StringUtils.isNullOrBlank(mSystemInput.getValue())
+                && !StringUtils.isNullOrBlank(mGenderValue.getValue())
+                && !StringUtils.isNullOrBlank(mSystemValue.getValue())
                 && !StringUtils.isNullOrBlank(mAgeInput.getValue())
                 && !StringUtils.isNullOrBlank(mHeightInput.getValue())
                 && !StringUtils.isNullOrBlank(mWeightInput.getValue());

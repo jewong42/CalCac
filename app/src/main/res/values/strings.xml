@@ -8,7 +8,6 @@
     <string name="gender_hint">Gender</string>
     <string name="system_of_measurements_hint">System of measurements</string>
     <string name="age_hint">Age</string>
-    <string name="submit">Submit</string>
     <string name="weight_hint">Weight</string>
     <string name="weight_hint_imperial">Weight (lb)</string>
     <string name="weight_hint_metric">Weight (kg)</string>
@@ -18,11 +17,17 @@
     <string name="diet_hint">Diet</string>
     <string name="weight_goal_hint">Weight goal</string>
 
-    <string name="backup_profile">Backup profile to drive</string>
-    <string name="reset_profile">Reset profile</string>
-    <string name="reset_confirmation">Are you sure you would like to reset your profile? You will be taken to a form where you can create a new profile.</string>
-    <string name="yes">Yes</string>
-    <string name="no">No, I changed my mind</string>
+    <string name="low_carb">Low carb</string>
+    <string name="paleo">Paleo</string>
+    <string name="keto">Keto</string>
+    <string name="traditional">Traditional</string>
+    <string name="weight_loss">Lose weight</string>
+    <string name="maintenance">Maintain weight</string>
+    <string name="weight_gain">Gain weight</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="imperial">Imperial (lb/in)</string>
+    <string name="metric">Metric (kg/cm)</string>
 
     <string name="carbohydrates_label">Carbs</string>
     <string name="fat_label">Fats</string>
@@ -30,48 +35,19 @@
     <string name="calories_label">Calories</string>
     <string name="gram">g</string>
     <string name="greeting">Hi %s</string>
+    <string name="profile_title">Here are your targets</string>
     <string name="quick_options">Quick Options</string>
+    <string name="reset_profile">Reset profile</string>
+    <string name="reset_confirmation">Are you sure you would like to reset your profile? You will be taken to a form where you can create a new profile.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No, I changed my mind</string>
 
-    <string name="restore_profile">Restore profile from drive</string>
     <string name="form_title">Please fill out your info</string>
     <string name="form_desc">Why do we need this info?</string>
     <string name="got_it">Got it</string>
     <string name="data_title">The Mifflin-St Jeor Equation</string>
-    <string name="data_info">This app uses Mifflin-St Jeor equation to calculate your target calories and macros. The data collected represents the minimum amount of information that this equation needs.</string>
-
-    <string name="low_carb">Low carb</string>
-    <string name="paleo">Paleo</string>
-    <string name="keto">Keto</string>
-    <string name="traditional">Traditional</string>
-    <string-array name="string_array_diet">
-        <item>@string/low_carb</item>
-        <item>@string/paleo</item>
-        <item>@string/keto</item>
-        <item>@string/traditional</item>
-    </string-array>
-
-    <string name="weight_loss">Lose weight</string>
-    <string name="maintenance">Maintain weight</string>
-    <string name="weight_gain">Gain weight</string>
-    <string-array name="string_array_goal">
-        <item>@string/weight_loss</item>
-        <item>@string/maintenance</item>
-        <item>@string/weight_gain</item>
-    </string-array>
-
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string-array name="string_array_gender">
-        <item>@string/male</item>
-        <item>@string/female</item>
-    </string-array>
-
-    <string name="imperial">Imperial</string>
-    <string name="metric">Metric</string>
-    <string-array name="string_array_system">
-        <item>@string/imperial</item>
-        <item>@string/metric</item>
-    </string-array>
+    <string name="data_info">This app uses the Mifflin-St Jeor equation to calculate your target calories and macros. The data collected represents the minimum amount of information that this equation needs.</string>
+    <string name="submit">Submit</string>
 
     <string name="widget_error_title">No profile</string>
     <string name="widget_error">Click to get started</string>

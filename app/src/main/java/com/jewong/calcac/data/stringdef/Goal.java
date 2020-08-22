@@ -13,10 +13,10 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 public @interface Goal {
 
-    String WEIGHT_LOSS = "Weight loss";
+    String WEIGHT_LOSS = "WEIGHT_LOSS";
 
-    String MAINTENANCE = "Maintenance";
+    String MAINTENANCE = "MAINTENANCE";
 
-    String WEIGHT_GAIN = "Weight gain";
+    String WEIGHT_GAIN = "WEIGHT_GAIN";
 
 }

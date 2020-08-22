@@ -1,6 +1,7 @@
 package com.jewong.calcac.ui;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,15 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
         return false;
     };
 
-    final static List<String> DIET_LIST = Arrays.asList(Diet.TRADITIONAL, Diet.PALEO, Diet.LOW_CARB, Diet.KETO);
-    final static List<String> WEIGHT_GOAL_LIST = Arrays.asList(Goal.WEIGHT_LOSS, Goal.WEIGHT_GAIN, Goal.MAINTENANCE);
+    final static List<Pair<Integer, String>> DIET_LIST = Arrays.asList(
+            new Pair<>(R.string.traditional, Diet.TRADITIONAL),
+            new Pair<>(R.string.paleo, Diet.PALEO),
+            new Pair<>(R.string.low_carb, Diet.LOW_CARB),
+            new Pair<>(R.string.keto, Diet.KETO));
+    final static List<Pair<Integer, String>> WEIGHT_GOAL_LIST = Arrays.asList(
+            new Pair<>(R.string.weight_gain, Goal.WEIGHT_LOSS),
+            new Pair<>(R.string.weight_gain, Goal.WEIGHT_GAIN),
+            new Pair<>(R.string.maintenance, Goal.MAINTENANCE));
 
     @Nullable
     @Override
@@ -61,10 +69,11 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
     }
 
     private void initObservers() {
-        mProfileViewModel.mDietInput.observe(getViewLifecycleOwner(), s -> mProfileViewModel.updateDiet());
-        mProfileViewModel.mGoalInput.observe(getViewLifecycleOwner(), s -> mProfileViewModel.updateGoal());
+        mProfileViewModel.mDietValue.observe(getViewLifecycleOwner(), s -> mProfileViewModel.updateDiet());
+        mProfileViewModel.mGoalValue.observe(getViewLifecycleOwner(), s -> mProfileViewModel.updateGoal());
     }
 
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     private void initViews() {
         mDataBinding.dietInput.setItems(DIET_LIST, getContext());
         mDataBinding.weightGoalInput.setItems(WEIGHT_GOAL_LIST, getContext());
@@ -90,9 +99,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
                 mDataBinding.greetingTextView.setText(String.format(getString(R.string.greeting), user.getName()));
             }
         });
-    }
-
-    private void backupProfile() {
     }
 
     @SuppressWarnings("CodeBlock2Expr")

@@ -44,7 +44,7 @@
     <string name="yes">Yes</string>
     <string name="no">No, I changed my mind</string>
 
-    <string name="form_title">Please fill out your info</string>
+    <string name="form_title">Please fill out your info to \n create profile</string>
     <string name="form_desc">Why do we need this info?</string>
     <string name="got_it">Got it</string>
     <string name="data_title">The Mifflin-St Jeor Equation</string>

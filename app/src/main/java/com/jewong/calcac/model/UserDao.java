@@ -14,6 +14,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE userId == 0")
     LiveData<User> loadUser();
 
+    @Query("SELECT * FROM user WHERE userId == 0")
+    User loadUserValue();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUser(User user);
 

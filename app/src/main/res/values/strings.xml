@@ -72,4 +72,7 @@
         <item>@string/metric</item>
     </string-array>
 
+    <string name="widget_error_title">No profile</string>
+    <string name="widget_error">Click to get started</string>
+
 </resources>

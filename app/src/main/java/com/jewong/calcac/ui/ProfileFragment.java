@@ -140,4 +140,8 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding> {
                 .show();
     }
 
+    @Override
+    public boolean onBackPressConsume() {
+        return true;
+    }
 }

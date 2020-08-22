@@ -16,6 +16,10 @@ public class BaseFragment<DB> extends Fragment {
         super.onDestroyView();
     }
 
+    public boolean onBackPressConsume() {
+        return false;
+    }
+
     protected void hideSoftKeyBoard() {
         if (getActivity() == null) return;
         View view = getActivity().getCurrentFocus();

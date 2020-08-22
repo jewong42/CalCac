@@ -63,7 +63,7 @@
                 android:padding="8dp"
                 android:text="@string/form_desc"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccentDark" />
+                android:textColor="@color/secondary_variant_color" />
 
             <com.jewong.calcac.view.JWTextInputLayout
                 android:id="@+id/name_input"
@@ -141,6 +141,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_button"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="62dp"

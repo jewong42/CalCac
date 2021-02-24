@@ -5,7 +5,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.jewong.calcac.common.BaseFragment
 
-class KeyboardEditorActionListener(
+class HideKeyboardEditorActionListener(
     private val fragment: BaseFragment<*>
 ) : TextView.OnEditorActionListener {
 

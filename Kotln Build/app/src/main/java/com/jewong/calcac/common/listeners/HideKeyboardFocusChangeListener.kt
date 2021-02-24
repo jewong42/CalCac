@@ -3,7 +3,7 @@ package com.jewong.calcac.common.listeners
 import android.view.View
 import com.jewong.calcac.common.BaseFragment
 
-class KeyboardFocusChangeListener(
+class HideKeyboardFocusChangeListener(
     private val fragment: BaseFragment<*>
 ): View.OnFocusChangeListener {
 

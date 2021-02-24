@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="JWTextInputLayout">
+        <attr name="android:hint" />
+        <attr name="android:inputType" />
+        <attr name="android:maxLength" />
+    </declare-styleable>
+
+    <declare-styleable name="JWDropDownInputLayout">
+        <attr name="android:hint" />
+    </declare-styleable>
+
+    <declare-styleable name="JWTextView">
+        <attr name="label" format="string|reference" />
+        <attr name="text" format="string|reference" />
+        <attr name="textSuffix" format="string|reference" />
+        <attr name="labelTextAppearance" format="reference" />
+        <attr name="textAppearance" format="reference" />
+        <attr name="textSuffixAppearance" format="reference" />
+    </declare-styleable>
+
+</resources>

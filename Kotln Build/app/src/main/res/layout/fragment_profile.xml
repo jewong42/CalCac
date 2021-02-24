@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--suppress XmlUnusedNamespaceDeclaration -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mEditorInfo"
+            type="android.view.inputmethod.EditorInfo" />
+
+        <variable
+            name="mProfileFormViewModel"
+            type="com.jewong.calcac.ui.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu_profile" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/greeting_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintBottom_toTopOf="@id/data_container"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/desc_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/profile_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greeting_text_view" />
+
+        <LinearLayout
+            android:id="@+id/data_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp"
+            app:layout_constraintBottom_toTopOf="@id/option_container"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_container"
+            app:layout_constraintVertical_bias="0.6">
+
+            <com.jewong.calcac.view.JWTextView
+                android:id="@+id/calories_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                app:label="@string/calories_label"
+                app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                app:text="@{String.valueOf(mProfileFormViewModel.mCalories)}"
+                app:textAppearance="@style/TextAppearance.MaterialComponents.Headline3" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/macro_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <com.jewong.calcac.view.JWTextView
+                    android:id="@+id/carb_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:label="@string/carbohydrates_label"
+                    app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                    app:text="@{String.valueOf(mProfileFormViewModel.mCarbohydrates)}"
+                    app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:textSuffix="@string/gram"
+                    app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                <com.jewong.calcac.view.JWTextView
+                    android:id="@+id/protein_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:label="@string/protein_label"
+                    app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                    app:text="@{String.valueOf(mProfileFormViewModel.mProtein)}"
+                    app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:textSuffix="@string/gram"
+                    app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                <com.jewong.calcac.view.JWTextView
+                    android:id="@+id/fat_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:label="@string/fat_label"
+                    app:labelTextAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                    app:text="@{String.valueOf(mProfileFormViewModel.mFat)}"
+                    app:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:textSuffix="@string/gram"
+                    app:textSuffixAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/option_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.MaterialComponents.Overline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/quick_options"
+                android:textAlignment="center" />
+
+            <com.jewong.calcac.view.JWTextInputLayout
+                android:id="@+id/weight_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@{mProfileFormViewModel.mWeightHint}"
+                android:inputType="numberDecimal"
+                android:text="@={mProfileFormViewModel.mWeightInput}"
+                app:imeOptions="@{mEditorInfo.IME_ACTION_DONE}" />
+
+            <com.jewong.calcac.view.JWDropDownInputLayout
+                android:id="@+id/diet_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/diet_hint"
+                android:text="@={mProfileFormViewModel.mDietInput}"
+                android:value="@={mProfileFormViewModel.mDietValue}" />
+
+            <com.jewong.calcac.view.JWDropDownInputLayout
+                android:id="@+id/weight_goal_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:hint="@string/weight_goal_hint"
+                android:text="@={mProfileFormViewModel.mGoalInput}"
+                android:value="@={mProfileFormViewModel.mGoalValue}" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <include
+            android:id="@+id/progress_bar"
+            layout="@layout/view_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#607d8b</color>
+    <color name="colorAccent">#fbc02d</color>
+
+    <color name="primary_variant_color">#34515e</color>
+    <color name="secondary_variant_color">#c49000</color>
+    <color name="surface_color">#FFFFFF</color>
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_on_secondary">#000000</color>
+    <color name="color_on_background">#FFFFFF</color>
+    <color name="color_on_error">#B00020</color>
+    <color name="color_on_surface">#212121</color>
+    <color name="scrim_color">#52000000</color>
+
+</resources>
